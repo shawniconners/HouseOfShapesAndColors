@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+        <meta charset="utf-8">
+            
+            
+            <!-- iphone/iPhone specific css below, add after your main css >
+             <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="iphone.css" type="text/css" />		
+             <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
+             -->
+            <!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
+            <script type="text/javascript" charset="utf-8" src="cordova-1.7.0.js"></script>
+            <script type="text/javascript">
+                
+                strColor = "";
+                strShape = "";
+                
+                
+                
+                function preventBehavior(e){ 
+                    e.preventDefault(); 
+                };
+                document.addEventListener("touchmove", preventBehavior, false);
+                document.addEventListener("touchstart", preventBehavior, false);
+                function funHideItem(inc_element_id){
+                    document.getElementById(inc_element_id).style.visibility = "hidden";
+                    document.getElementById(inc_element_id).style.display = "none";
+                }
+                function funShowItem(inc_element_id){
+                    document.getElementById(inc_element_id).style.visibility = "visible";
+                    document.getElementById(inc_element_id).style.display = "block";
+                }
+                
+                function funSuccess(){
+                    //alert("caller is " + arguments.callee.toString());
+                }
+                
+                function funError(){
+                    //alert("error");
+                }
+                
+                
+                function onBodyLoad()
+                {		
+                    document.addEventListener("deviceready", onDeviceReady, false);
+                }
+                
+                function onDeviceReady(){
+                    document.getElementById("img_face_blue_circle_smile").addEventListener("touchstart", function(e){funSelectionMade("blue","circle");});
+                    document.getElementById("img_face_blue_circle_frown").addEventListener("touchstart", function(e){funSelectionMade("blue","circle");});
+                    document.getElementById("img_face_red_triangle_smile").addEventListener("touchstart", function(e){funSelectionMade("red","triangle");});
+                    document.getElementById("img_face_red_triangle_frown").addEventListener("touchstart", function(e){funSelectionMade("red","triangle");});
+                    document.getElementById("img_face_green_square_smile").addEventListener("touchstart", function(e){funSelectionMade("green","square");});
+                    document.getElementById("img_face_green_square_frown").addEventListener("touchstart", function(e){funSelectionMade("green","square");});
+                    document.getElementById("img_face_green_triangle_smile").addEventListener("touchstart", function(e){funSelectionMade("green","triangle");});
+                    document.getElementById("img_face_green_triangle_frown").addEventListener("touchstart", function(e){funSelectionMade("green","triangle");});
+                    document.getElementById("img_face_blue_square_smile").addEventListener("touchstart", function(e){funSelectionMade("blue","square");});
+                    document.getElementById("img_face_blue_square_frown").addEventListener("touchstart", function(e){funSelectionMade("blue","square");});
+                    document.getElementById("img_face_red_circle_smile").addEventListener("touchstart", function(e){funSelectionMade("red","circle");});
+                    document.getElementById("img_face_red_circle_frown").addEventListener("touchstart", function(e){funSelectionMade("red","circle");});
+                    document.getElementById("img_face_red_square_smile").addEventListener("touchstart", function(e){funSelectionMade("red","square");});
+                    document.getElementById("img_face_red_square_frown").addEventListener("touchstart", function(e){funSelectionMade("red","square");});
+                    document.getElementById("img_face_green_circle_smile").addEventListener("touchstart", function(e){funSelectionMade("green","circle");});
+                    document.getElementById("img_face_green_circle_frown").addEventListener("touchstart", function(e){funSelectionMade("green","circle");});
+                    document.getElementById("img_face_blue_triangle_smile").addEventListener("touchstart", function(e){funSelectionMade("blue","triangle");});
+                    document.getElementById("img_face_blue_triangle_frown").addEventListener("touchstart", function(e){funSelectionMade("blue","triangle");});
+                    
+                    document.getElementById("img_face_blue_triangle_frown").addEventListener("webkitAnimationEnd", function(e){funHideItem("img_face_blue_triangle_frown");});
+                    document.getElementById("img_face_blue_square_frown").addEventListener("webkitAnimationEnd", function(e){funHideItem("img_face_blue_square_frown");});
+                    document.getElementById("img_face_blue_circle_frown").addEventListener("webkitAnimationEnd", function(e){funHideItem("img_face_blue_circle_frown");});
+                    
+                    document.getElementById("img_face_red_triangle_frown").addEventListener("webkitAnimationEnd", function(e){funHideItem("img_face_red_triangle_frown");});
+                    document.getElementById("img_face_red_square_frown").addEventListener("webkitAnimationEnd", function(e){funHideItem("img_face_red_square_frown");});
+                    document.getElementById("img_face_red_circle_frown").addEventListener("webkitAnimationEnd", function(e){funHideItem("img_face_red_circle_frown");});
+                    
+                    document.getElementById("img_face_green_triangle_frown").addEventListener("webkitAnimationEnd", function(e){funHideItem("img_face_green_triangle_frown");});
+                    document.getElementById("img_face_green_square_frown").addEventListener("webkitAnimationEnd", function(e){funHideItem("img_face_green_square_frown");});
+                    document.getElementById("img_face_green_circle_frown").addEventListener("webkitAnimationEnd", function(e){funHideItem("img_face_green_circle_frown");});
+                    
+                    
+                    document.getElementById("img_face_blue_triangle_smile_correct").addEventListener("webkitAnimationEnd", function(e){funShowItem("img_face_blue_triangle_smile");funHideItem("img_face_blue_triangle_smile_correct");});
+                    document.getElementById("img_face_blue_square_smile_correct").addEventListener("webkitAnimationEnd", function(e){funShowItem("img_face_blue_square_smile");funHideItem("img_face_blue_square_smile_correct");});
+                    document.getElementById("img_face_blue_circle_smile_correct").addEventListener("webkitAnimationEnd", function(e){funShowItem("img_face_blue_circle_smile");funHideItem("img_face_blue_circle_smile_correct");});
+                    
+                    document.getElementById("img_face_red_triangle_smile_correct").addEventListener("webkitAnimationEnd", function(e){funShowItem("img_face_red_triangle_smile");funHideItem("img_face_red_triangle_smile_correct");});
+                    document.getElementById("img_face_red_square_smile_correct").addEventListener("webkitAnimationEnd", function(e){funShowItem("img_face_red_square_smile");funHideItem("img_face_red_square_smile_correct");});
+                    document.getElementById("img_face_red_circle_smile_correct").addEventListener("webkitAnimationEnd", function(e){funShowItem("img_face_red_circle_smile");funHideItem("img_face_red_circle_smile_correct");});
+                    
+                    document.getElementById("img_face_green_triangle_smile_correct").addEventListener("webkitAnimationEnd", function(e){funShowItem("img_face_green_triangle_smile");funHideItem("img_face_green_triangle_smile_correct");});
+                    document.getElementById("img_face_green_square_smile_correct").addEventListener("webkitAnimationEnd", function(e){funShowItem("img_face_green_square_smile");funHideItem("img_face_green_square_smile_correct");});
+                    document.getElementById("img_face_green_circle_smile_correct").addEventListener("webkitAnimationEnd", function(e){funShowItem("img_face_green_circle_smile");funHideItem("img_face_green_circle_smile_correct");});
+                    
+                    
+                    funResetAll();
+                }
+                
+                function funSelectionMade(inc_color, inc_shape){
+                    if((inc_color == strColor) && (inc_shape == strShape)){
+                        funHideItem("img_face_" + inc_color + "_" + inc_shape + "_smile");
+                        funShowItem("img_face_" + inc_color + "_" + inc_shape + "_smile_correct");
+                        mp3Correct = new Media("correct.mp3", function(e){funResetAll();}, funError);
+                        mp3Correct.play();
+                    }else{
+                        funShowItem("img_face_" + inc_color + "_" + inc_shape + "_frown");
+                        funHideItem("img_face_" + inc_color + "_" + inc_shape + "_smile");
+                        mp3Sorry = new Media("sorry.mp3", funSuccess, funError);
+                        mp3Sorry.play();
+                    }
+                }
+                
+                function funShowAllShapeSmiles(){
+                    funShowItem("img_face_blue_circle_smile");
+                    funShowItem("img_face_red_triangle_smile");
+                    funShowItem("img_face_green_square_smile");
+                    funShowItem("img_face_green_triangle_smile");
+                    funShowItem("img_face_blue_square_smile");
+                    funShowItem("img_face_red_circle_smile");
+                    funShowItem("img_face_red_square_smile");
+                    funShowItem("img_face_green_circle_smile");
+                    funShowItem("img_face_blue_triangle_smile");
+                }
+                
+                function funHideAllShapeFrowns(){
+                    funHideItem("img_face_blue_circle_frown");
+                    funHideItem("img_face_red_triangle_frown");
+                    funHideItem("img_face_green_square_frown");
+                    funHideItem("img_face_green_triangle_frown");
+                    funHideItem("img_face_blue_square_frown");
+                    funHideItem("img_face_red_circle_frown");
+                    funHideItem("img_face_red_square_frown");
+                    funHideItem("img_face_green_circle_frown");
+                    funHideItem("img_face_blue_triangle_frown");
+                }
+                
+                
+                function funRandomNumber(){
+                    return Math.floor(Math.random()*3)+1;
+                }
+                
+                function funResetAll(){
+                    strColor = funRandomColor();
+                    strShape = funRandomShape();
+                    funHideAllShapeFrowns();
+                    funShowAllShapeSmiles();
+                    funHideAllObjects("background");
+                    funHideAllObjects("house");
+                    funHideAllObjects("roof");
+                    funHideAllObjects("grass");
+                    funShowRandomObject("background");
+                    funShowRandomObject("house");
+                    funShowRandomObject("roof");
+                    funShowRandomObject("grass");
+                    t=setTimeout("funAnnounceCombo()",300)
+                }
+                
+                
+                function funAnnounceCombo(){
+                    document.getElementById("div_combo").innerHTML = "Find the " + strColor + " " + strShape + ".";
+                    strAudioFile = strColor + "_" + strShape + ".mp3";
+                    mp3Audio = new Media(strAudioFile, funSuccess, funError);
+                    mp3Audio.play();
+                }
+                
+                function funHideAllObjects(inc_object){
+                    funHideItem("img_" + inc_object + "_1");
+                    funHideItem("img_" + inc_object + "_2");
+                    funHideItem("img_" + inc_object + "_3");
+                }
+                
+                function funShowRandomObject(inc_object){
+                    funShowItem("img_" + inc_object + "_" + funRandomNumber());
+                }
+                
+                
+                
+                function funRandomColor(){
+                    intRnd = funRandomNumber();
+                    if(intRnd == 1){
+                        return "red";
+                    }else if(intRnd == 2){
+                        return "blue";
+                    }else if(intRnd == 3){
+                        return "green";
+                    }
+                }
+                
+                function funRandomShape(){
+                    intRnd = funRandomNumber();
+                    if(intRnd == 1){
+                        return "circle";
+                    }else if(intRnd == 2){
+                        return "square";
+                    }else if(intRnd == 3){
+                        return "triangle";
+                    }
+                }
+                
+                </script>
+            <style>
+                #img_background_1, #img_background_2, #img_background_3{
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    visibility: hidden;
+                    display: none;
+                }
+                #img_grass_1, #img_grass_2, #img_grass_3{
+                    position: absolute;
+                    top: 512px;
+                    left: 0px;
+                    visibility: hidden;
+                    display: none;
+                }
+                #img_house_1, #img_house_2, #img_house_3{
+                    position: absolute;
+                    top: 170px;
+                    left: 128px;
+                    visibility: hidden;
+                    display: none;
+                }
+                #img_roof_1, #img_roof_2, #img_roof_3{
+                    position: absolute;
+                    top: 26px;
+                    left: 128px;
+                    visibility: hidden;
+                    display: none;
+                }
+                #img_windows{
+                    position: absolute;
+                    top: 189px;
+                    left: 150px;
+                }
+                
+                #img_face_blue_circle_smile{
+                    position: absolute;
+                    top: 198px;
+                    left: 195px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_blue_circle_frown{
+                    position: absolute;
+                    top: 198px;
+                    left: 195px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_red_triangle_smile{
+                    position: absolute;
+                    top: 208px;
+                    left: 435px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_red_triangle_frown{
+                    position: absolute;
+                    top: 204px;
+                    left: 430px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_green_square_smile{
+                    position: absolute;
+                    top: 198px;
+                    left: 700px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_green_square_frown{
+                    position: absolute;
+                    top: 198px;
+                    left: 700px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_green_triangle_smile{
+                    position: absolute;
+                    top: 400px;
+                    left: 175px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_green_triangle_frown{
+                    position: absolute;
+                    top: 408px;
+                    left: 180px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_blue_square_smile{
+                    position: absolute;
+                    top: 385px;
+                    left: 450px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_blue_square_frown{
+                    position: absolute;
+                    top: 385px;
+                    left: 450px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_red_circle_smile{
+                    position: absolute;
+                    top: 385px;
+                    left: 700px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_red_circle_frown{
+                    position: absolute;
+                    top: 385px;
+                    left: 700px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_red_square_smile{
+                    position: absolute;
+                    top: 573px;
+                    left: 195px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_red_square_frown{
+                    position: absolute;
+                    top: 573px;
+                    left: 195px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_green_circle_smile{
+                    position: absolute;
+                    top: 573px;
+                    left: 450px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_green_circle_frown{
+                    position: absolute;
+                    top: 573px;
+                    left: 450px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_blue_triangle_smile{
+                    position: absolute;
+                    top: 583px;
+                    left: 685px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                #img_face_blue_triangle_frown{
+                    position: absolute;
+                    top: 575px;
+                    left: 685px;
+                    visibility: hidden;
+                    display: none;
+                    
+                }
+                
+                /*
+                 animation faces
+                 */
+                
+                #img_face_blue_circle_smile_correct{
+                    position: absolute;
+                    top: 198px;
+                    left: 195px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                
+                #img_face_red_triangle_smile_correct{
+                    position: absolute;
+                    top: 208px;
+                    left: 435px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                
+                #img_face_green_square_smile_correct{
+                    position: absolute;
+                    top: 198px;
+                    left: 700px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                
+                #img_face_green_triangle_smile_correct{
+                    position: absolute;
+                    top: 400px;
+                    left: 175px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                
+                #img_face_blue_square_smile_correct{
+                    position: absolute;
+                    top: 385px;
+                    left: 450px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                
+                #img_face_red_circle_smile_correct{
+                    position: absolute;
+                    top: 385px;
+                    left: 700px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                
+                #img_face_red_square_smile_correct{
+                    position: absolute;
+                    top: 573px;
+                    left: 195px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                
+                #img_face_green_circle_smile_correct{
+                    position: absolute;
+                    top: 573px;
+                    left: 450px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                
+                #img_face_blue_triangle_smile_correct{
+                    position: absolute;
+                    top: 583px;
+                    left: 685px;
+                    visibility: hidden;
+                    display: none;
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+                #img_face_blue_triangle_frown,
+                #img_face_blue_square_frown,
+                #img_face_blue_circle_frown,
+                #img_face_red_triangle_frown,
+                #img_face_red_square_frown,
+                #img_face_red_circle_frown,
+                #img_face_green_triangle_frown,
+                #img_face_green_square_frown,
+                #img_face_green_circle_frown
+                {
+                    -webkit-animation-name: anmSorry;
+                    -webkit-animation-duration: 2.4s;
+                    -webkit-animation-iteration-count: 1;
+                    
+                }
+                
+                #img_face_blue_triangle_smile_correct,
+                #img_face_blue_square_smile_correct,
+                #img_face_blue_circle_smile_correct,
+                #img_face_red_triangle_smile_correct,
+                #img_face_red_square_smile_correct,
+                #img_face_red_circle_smile_correct,
+                #img_face_green_triangle_smile_correct,
+                #img_face_green_square_smile_correct,
+                #img_face_green_circle_smile_correct
+                {
+                    -webkit-animation-name: anmCorrect;
+                    -webkit-animation-duration: 2.4s;
+                    -webkit-animation-iteration-count: 1;
+                    
+                }
+                
+                @-webkit-keyframes anmSorry
+                {
+                    from { none; }
+                    to { -webkit-transform: translate(-1000px, -1000px) rotate(360deg); }
+                }
+                
+                @-webkit-keyframes anmCorrect
+                {
+                    from { none; }
+                    to { -webkit-transform: rotate(3600deg); }
+                }
+                
+                
+                #div_combo{
+                    position: absolute;
+                    width: 300px;
+                    text-align: center;
+                    top: 110px;
+                    left: 210px;
+                    font-family: Verdana;
+                    font-size: 36px;
+                    color: #FFF;
+                }
+                
+                </style>
+            </head>
+    <body onload="onBodyLoad()">
+        <img id="img_background_1" src="iphone_background_1.png" />
+        <img id="img_background_2" src="iphone_background_2.png" />
+        <img id="img_background_3" src="iphone_background_3.png" />
+        <img id="img_grass_1" src="iphone_grass_1.png" />
+        <img id="img_grass_2" src="iphone_grass_2.png" />
+        <img id="img_grass_3" src="iphone_grass_3.png" />
+        <img id="img_house_1" src="iphone_house_1.png" />
+        <img id="img_house_2" src="iphone_house_2.png" />
+        <img id="img_house_3" src="iphone_house_3.png" />
+        <img id="img_roof_1" src="iphone_roof_1.png" />
+        <img id="img_roof_2" src="iphone_roof_2.png" />
+        <img id="img_roof_3" src="iphone_roof_3.png" />
+        <img id="img_windows" src="iphone_windows.png"/>
+        <img id="img_face_blue_circle_smile" src="iphone_face_blue_circle_smile.png"/>
+        <img id="img_face_blue_circle_frown" src="iphone_face_blue_circle_frown.png"/>
+        <img id="img_face_red_triangle_smile" src="iphone_face_red_triangle_smile.png"/>
+        <img id="img_face_red_triangle_frown" src="iphone_face_red_triangle_frown.png"/>
+        <img id="img_face_green_square_smile" src="iphone_face_green_square_smile.png"/>
+        <img id="img_face_green_square_frown" src="iphone_face_green_square_frown.png"/>
+        <img id="img_face_green_triangle_smile" src="iphone_face_green_triangle_smile.png"/>
+        <img id="img_face_green_triangle_frown" src="iphone_face_green_triangle_frown.png"/>
+        <img id="img_face_blue_square_smile" src="iphone_face_blue_square_smile.png"/>
+        <img id="img_face_blue_square_frown" src="iphone_face_blue_square_frown.png"/>
+        <img id="img_face_red_circle_smile" src="iphone_face_red_circle_smile.png"/>
+        <img id="img_face_red_circle_frown" src="iphone_face_red_circle_frown.png"/>
+        <img id="img_face_red_square_smile" src="iphone_face_red_square_smile.png"/>
+        <img id="img_face_red_square_frown" src="iphone_face_red_square_frown.png"/>
+        <img id="img_face_green_circle_smile" src="iphone_face_green_circle_smile.png"/>
+        <img id="img_face_green_circle_frown" src="iphone_face_green_circle_frown.png"/>
+        <img id="img_face_blue_triangle_smile" src="iphone_face_blue_triangle_smile.png"/>
+        <img id="img_face_blue_triangle_frown" src="iphone_face_blue_triangle_frown.png"/>
+        
+        <img id="img_face_blue_circle_smile_correct" src="iphone_face_blue_circle_smile.png"/>
+        <img id="img_face_red_triangle_smile_correct" src="iphone_face_red_triangle_smile.png"/>
+        <img id="img_face_green_square_smile_correct" src="iphone_face_green_square_smile.png"/>
+        <img id="img_face_green_triangle_smile_correct" src="iphone_face_green_triangle_smile.png"/>
+        <img id="img_face_blue_square_smile_correct" src="iphone_face_blue_square_smile.png"/>
+        <img id="img_face_red_circle_smile_correct" src="iphone_face_red_circle_smile.png"/>
+        <img id="img_face_red_square_smile_correct" src="iphone_face_red_square_smile.png"/>
+        <img id="img_face_green_circle_smile_correct" src="iphone_face_green_circle_smile.png"/>
+        <img id="img_face_blue_triangle_smile_correct" src="iphone_face_blue_triangle_smile.png"/>
+        <div id="div_combo"></div>
+    </body>
+</html>
